@@ -9,6 +9,19 @@ export function Footer() {
           {SITE.city}, {SITE.country}
         </p>
         <a
+          href={SITE.linkedin}
+          rel="me"
+          className="text-[12px] text-bone/55 transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:text-bone"
+        >
+          LinkedIn
+        </a>
+        <a
+          href={SITE.orgUrl}
+          className="text-[12px] text-bone/55 transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:text-bone"
+        >
+          {SITE.orgLegal}
+        </a>
+        <a
           href={`mailto:${SITE.email}`}
           className="text-[12px] text-bone/55 transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:text-bone"
         >

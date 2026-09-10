@@ -1,3 +1,4 @@
+import { FACTS } from "../lib/site";
 import { Reveal } from "./reveal";
 
 const FORMACION = [
@@ -63,6 +64,17 @@ export function Semblanza() {
             por el número. Bridge ejecuta.
           </p>
         </Reveal>
+
+        <dl className="mt-16 grid max-w-[820px] gap-8 sm:grid-cols-2">
+          {FACTS.map((fact, index) => (
+            <Reveal key={fact.label} delay={index * 0.04}>
+              <dt className="text-[13px] text-bone/45">{fact.label}</dt>
+              <dd className="mt-2 max-w-[32ch] text-[17px] leading-snug tracking-[-0.02em]">
+                {fact.value}
+              </dd>
+            </Reveal>
+          ))}
+        </dl>
 
         <div className="mt-20 grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">

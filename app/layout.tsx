@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { jsonLd } from "./lib/schema";
 import { SITE } from "./lib/site";
 
 const geist = Geist({
@@ -15,26 +16,58 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const title = "Edgard Vargas | Director General de Bridge";
-const description =
-  "Fundador de Bridge. La conversación sobre inteligencia artificial en medianas y grandes empresas de México.";
+const title = `${SITE.name} | ${SITE.jobTitle}`;
+const description = SITE.description;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title,
   description,
-  authors: [{ name: SITE.name }],
+  applicationName: SITE.name,
+  authors: [{ name: SITE.name, url: SITE.url }],
+  creator: SITE.name,
+  publisher: SITE.orgLegal,
+  category: "Technology",
+  keywords: [
+    "Edgard Vargas",
+    "Bridge",
+    "Bridge Studio",
+    "inteligencia artificial",
+    "Guadalajara",
+    "Director General",
+  ],
+  alternates: {
+    canonical: "/",
+    languages: {
+      "es-MX": "/",
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     title,
     description,
-    type: "website",
+    url: SITE.url,
+    siteName: SITE.name,
     locale: "es_MX",
+    type: "profile",
+    firstName: SITE.givenName,
+    lastName: SITE.familyName,
     images: [
       {
-        url: "/assets/EDV-WEB-OG_1200x630.jpg",
+        url: SITE.og,
         width: 1200,
         height: 630,
-        alt: "Edgard Vargas, Director General de Bridge",
+        alt: `${SITE.name}, ${SITE.jobTitle}`,
       },
     ],
   },
@@ -42,38 +75,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/assets/EDV-WEB-OG_1200x630.jpg"],
+    images: [SITE.og],
   },
-};
-
-const personJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: SITE.name,
-  jobTitle: "Director General",
-  description,
-  worksFor: {
-    "@type": "Organization",
-    name: SITE.org,
-  },
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: SITE.city,
-    addressCountry: "MX",
-  },
-  email: SITE.email,
-  url: SITE.url,
-  alumniOf: {
-    "@type": "CollegeOrUniversity",
-    name: "Universidad Guadalajara Lamar",
-  },
-  knowsAbout: [
-    "Inteligencia artificial en la empresa",
-    "Software",
-    "Arquitectura de datos",
-    "Marketing digital",
-    "Tecnología en México",
-  ],
 };
 
 export default function RootLayout({
@@ -83,13 +86,13 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="es"
+      lang="es-MX"
       className={`${geist.variable} ${geistMono.variable} dark`}
     >
       <body className="bg-ink font-sans text-bone antialiased">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd()) }}
         />
         {children}
       </body>
