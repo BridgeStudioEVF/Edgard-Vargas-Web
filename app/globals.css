@@ -1,27 +1,35 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-source-serif), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --color-blue-e: #2155ff;
   --color-ink: #0a0a0a;
+  --color-void: #111111;
   --color-bone: #f4f4f2;
-  --color-paper: #ffffff;
+  --ease-out-quart: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-apple: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: var(--color-bone);
-    color: var(--color-ink);
+    background-color: var(--color-ink);
+    color: var(--color-bone);
+    color-scheme: dark;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
   body {
     font-family: var(--font-sans);
-    background-color: var(--color-bone);
-    color: var(--color-ink);
+    background-color: var(--color-ink);
+    color: var(--color-bone);
+  }
+
+  a[href],
+  button {
+    cursor: pointer;
   }
 
   ::selection {
@@ -44,62 +52,28 @@
   inset: 0;
   z-index: 40;
   pointer-events: none;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 160px 160px;
-  mix-blend-mode: multiply;
+  mix-blend-mode: overlay;
 }
 
-.link-draw {
-  position: relative;
+.hero-line line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: drawLine 1.2s 0.18s var(--ease-out-quart) forwards;
 }
 
-.link-draw::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -3px;
-  height: 1px;
-  width: 100%;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.link-draw:hover::after,
-.link-draw:focus-visible::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-.cta-blue {
-  display: inline-flex;
-  align-items: center;
-  background-color: var(--color-blue-e);
-  color: #fff;
-  padding: 0.9rem 1.75rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  transition:
-    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-    background-color 0.2s ease;
-}
-
-.cta-blue:hover {
-  background-color: #143fd1;
-  transform: translateY(-2px);
-}
-
-.cta-blue:active {
-  transform: translateY(1px) scale(0.98);
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 @keyframes riseIn {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
@@ -109,32 +83,17 @@
 
 .rise {
   opacity: 0;
-  animation: riseIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: riseIn 0.85s var(--ease-out-quart) forwards;
 }
 
 .rise-1 {
   animation-delay: 0.08s;
 }
 .rise-2 {
-  animation-delay: 0.16s;
+  animation-delay: 0.18s;
 }
 .rise-3 {
-  animation-delay: 0.24s;
-}
-.rise-4 {
-  animation-delay: 0.32s;
-}
-
-.hero-line line {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: drawLine 1.3s 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-@keyframes drawLine {
-  to {
-    stroke-dashoffset: 0;
-  }
+  animation-delay: 0.28s;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -142,15 +101,10 @@
     scroll-behavior: auto;
   }
 
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-
+  .hero-line line,
   .rise {
+    animation: none;
     opacity: 1;
+    stroke-dashoffset: 0;
   }
 }

@@ -1,31 +1,29 @@
 import type { Metadata } from "next";
-import { Archivo, Source_Serif_4 } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { SITE } from "./lib/site";
 
-const archivo = Archivo({
+const geist = Geist({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-archivo",
+  variable: "--font-geist",
   display: "swap",
 });
 
-const sourceSerif = Source_Serif_4({
+const geistMono = Geist_Mono({
   subsets: ["latin"],
-  weight: ["400"],
-  style: ["normal"],
-  variable: "--font-source-serif",
+  variable: "--font-geist-mono",
   display: "swap",
 });
 
 const title = "Edgard Vargas | Director General de Bridge";
 const description =
-  "Software y marketing digital para empresas medianas. Guadalajara, México.";
+  "Fundador de Bridge. La conversación sobre inteligencia artificial en medianas y grandes empresas de México.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://edgardvargas.higgsfield.app"),
+  metadataBase: new URL(SITE.url),
   title,
   description,
-  authors: [{ name: "Edgard Vargas" }],
+  authors: [{ name: SITE.name }],
   openGraph: {
     title,
     description,
@@ -51,19 +49,31 @@ export const metadata: Metadata = {
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Edgard Vargas",
+  name: SITE.name,
   jobTitle: "Director General",
+  description,
   worksFor: {
     "@type": "Organization",
-    name: "Bridge",
+    name: SITE.org,
   },
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Guadalajara",
+    addressLocality: SITE.city,
     addressCountry: "MX",
   },
-  email: "edgard@bridgestudio.com.mx",
-  url: "https://edgardvargas.higgsfield.app",
+  email: SITE.email,
+  url: SITE.url,
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Universidad Guadalajara Lamar",
+  },
+  knowsAbout: [
+    "Inteligencia artificial en la empresa",
+    "Software",
+    "Arquitectura de datos",
+    "Marketing digital",
+    "Tecnología en México",
+  ],
 };
 
 export default function RootLayout({
@@ -72,8 +82,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${archivo.variable} ${sourceSerif.variable}`}>
-      <body className="bg-bone font-sans text-ink antialiased">
+    <html
+      lang="es"
+      className={`${geist.variable} ${geistMono.variable} dark`}
+    >
+      <body className="bg-ink font-sans text-bone antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
