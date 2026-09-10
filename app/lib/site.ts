@@ -13,7 +13,7 @@ export const SITE = {
   orgUrl: "https://bridgestudio.mx",
   orgEmail: "hola@bridgestudio.com.mx",
   orgPhone: "+52-33-1487-8908",
-  url: "https://edgardvargas.com",
+  url: "https://www.edgardvargas.com",
   founded: "2013",
   image: "/assets/EDV-WEB-03_perfil_luz-azul.jpg",
   og: "/assets/EDV-WEB-OG_1200x630.jpg",

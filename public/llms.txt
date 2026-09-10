@@ -6,9 +6,9 @@ Edgard Vargas is the CEO and founder of Bridge, a software, data, and digital ma
 
 ## Site
 
-- [Edgard Vargas](https://edgardvargas.com): founder site, manifesto, bio, work, talks
+- [Edgard Vargas](https://www.edgardvargas.com): founder site, manifesto, bio, work, talks
 - [LinkedIn](https://www.linkedin.com/in/edgard-vargas-294b3375/)
-- [Full source for language models](https://edgardvargas.com/llms-full.txt)
+- [Full source for language models](https://www.edgardvargas.com/llms-full.txt)
 
 ## Organization
 

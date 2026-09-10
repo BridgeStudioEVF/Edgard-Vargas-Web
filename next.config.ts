@@ -9,14 +9,8 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/:path*",
-        has: [{ type: "host", value: "www.edgardvargas.com" }],
-        destination: "https://edgardvargas.com/:path*",
-        permanent: true,
-      },
-      {
-        source: "/:path*",
         has: [{ type: "host", value: "edgard-vargas-web.vercel.app" }],
-        destination: "https://edgardvargas.com/:path*",
+        destination: "https://www.edgardvargas.com/:path*",
         permanent: true,
       },
     ];
